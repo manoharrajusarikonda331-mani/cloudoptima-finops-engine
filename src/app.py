@@ -6,7 +6,7 @@ from agents.llm_router import optimize_llm_costs
 
 st.set_page_config(page_title="CloudOptima Dashboard", layout="wide")
 
-st.title("☁️ CloudOptima: Agentic FinOps Engine")
+st.title("☁️ CloudOptima: Agentic FinOps Engine!")
 st.subheader("Autonomous Cloud Infrastructure & LLM Cost Engineering")
 st.markdown("---")
 
