@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: 'Inter', sans-serif;
+  background-color: #0B1120;
+  color: #f3f4f6;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, rgba(59,130,246,0.16), transparent 28%), #0B1120;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(59,130,246,0.4);
+  color: white;
+}
+
+.splash-particle {
+  animation: drift 2.4s ease-in-out infinite;
+  box-shadow: 0 0 16px rgba(96, 165, 250, 0.6);
+}
+
+.glow-ring {
+  animation: pulseGlow 1.6s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate3d(8px, -12px, 0) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.45);
+    transform: scale(1.04);
+  }
+}
