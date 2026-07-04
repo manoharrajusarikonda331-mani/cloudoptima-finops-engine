@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-07-04T12:00:00Z",
+  "ec2_instances": [
+    {
+      "instance_id": "i-099a123bc456def78",
+      "name": "Production-Main-DB",
+      "cpu_utilization": 84.2,
+      "hourly_cost": 1.50,
+      "status": "Active"
+    },
+    {
+      "instance_id": "i-077b987xx111aaa22",
+      "name": "Staging-Testing-Environment",
+      "cpu_utilization": 2.1,
+      "hourly_cost": 0.65,
+      "status": "Idle"
+    },
+    {
+      "instance_id": "i-044c555yy222bbb33",
+      "name": "Legacy-Analytics-Node",
+      "cpu_utilization": 0.8,
+      "hourly_cost": 1.20,
+      "status": "Zombie"
+    }
+  ],
+  "llm_logs": [
+    {
+      "prompt": "Fix spelling: 'He walk to store'",
+      "complexity": "Low",
+      "tokens": 25,
+      "current_model": "GPT-4o (Premium)",
+      "cost": 0.015
+    },
+    {
+      "prompt": "Build a predictive revenue model from this 500-line CSV ledger.",
+      "complexity": "High",
+      "tokens": 8500,
+      "current_model": "GPT-4o (Premium)",
+      "cost": 0.450
+    }
+  ]
+}
