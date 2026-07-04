@@ -97,7 +97,7 @@ const serverData = [
     reason: 'This workload is consistently underutilized and can move to a smaller instance without significant latency impact.',
     cpuSeries: [{ label: '00', value: 24 }, { label: '04', value: 33 }, { label: '08', value: 31 }, { label: '12', value: 38 }, { label: '16', value: 29 }, { label: '20', value: 36 }],
     ramSeries: [{ label: '00', value: 42 }, { label: '04', value: 47 }, { label: '08', value: 51 }, { label: '12', value: 52 }, { label: '16', value: 49 }, { label: '20', value: 54 }],
-    storageSeries: [{ label: 'Mon', value: 60 }, { label: 'Tue', value: 63 }, { label: 'Wed', value: 66 }, { label: 'Thu', value: 64 }, { label: 'Fri', value: 68 }, { label: 'Sat', value: 72 }],
+    storageSeries: [{ label: 'Mon', value: 60 }, { label: 'Tue', value: 63 }, { label: 'Wed', value: 66 }, { label: 'Thu', value: 64 }, { fontLabel: 'Fri', value: 68 }, { label: 'Sat', value: 72 }],
     networkSeries: [{ label: 'Mon', value: 180 }, { label: 'Tue', value: 210 }, { label: 'Wed', value: 195 }, { label: 'Thu', value: 220 }, { label: 'Fri', value: 240 }, { label: 'Sat', value: 260 }],
   },
   {
@@ -286,7 +286,6 @@ function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* 🟢 CORE HACKATHON CONNECT ACTION BUTTON FOR JUDGES */}
             <a 
               href={STREAMLIT_URL}
               target="_blank"
@@ -350,7 +349,6 @@ function App() {
                     <p className="text-xs text-slate-400">Autonomous actions enabled</p>
                   </div>
                 </div>
-                {/* 🟢 ALSO CONNECT SIDEBAR REDIRECT FOR DUAL LAYOUT INTEGRATION */}
                 <a 
                   href={STREAMLIT_URL}
                   target="_blank"
@@ -467,118 +465,28 @@ function App() {
                             <th className="px-3 py-3">Cost</th>
                             <th className="px-3 py-3">Health</th>
                           </tr>
-                        </table>
+                        </thead>
                         <tbody>
                           {serverData.map((server) => {
                             const isExpanded = expandedServer === server.id;
                             return (
-                              <div key={server.id}>
-                                <tr className="border-t border-white/10 bg-slate-900/40 text-slate-200">
-                                  <td className="px-3 py-3">
-                                    <button onClick={() => setExpandedServer(isExpanded ? null : server.id)} className="flex items-center gap-2 font-medium text-white">
-                                      {server.name}
-                                      <ChevronDown size={14} className={`transition ${isExpanded ? 'rotate-180' : ''}`} />
-                                    </button>
-                                  </td>
-                                  <td className="px-3 py-3">{server.provider}</td>
-                                  <td className="px-3 py-3">{server.type}</td>
-                                  <td className="px-3 py-3">{server.region}</td>
-                                  <td className="px-3 py-3">{server.cpu}%</td>
-                                  <td className="px-3 py-3">{server.ram}%</td>
-                                  <td className="px-3 py-3 text-emerald-300">{server.monthlyCost}</td>
-                                  <td className="px-3 py-3">
-                                    <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300">{server.health}</span>
-                                  </td>
-                                </tr>
-                                {isExpanded ? (
-                                  <tr className="border-t border-white/10 bg-slate-950/70">
-                                    <td colSpan="8" className="px-3 py-4">
-                                      <div className="grid gap-3 lg:grid-cols-2">
-                                        <div className="space-y-3">
-                                          <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                            <p className="mb-2 text-sm font-medium text-slate-300">CPU Utilization</p>
-                                            <div className="h-20">
-                                              <ResponsiveContainer width="100%" height="100%">
-                                                <LineChart data={server.cpuSeries}>
-                                                  <Tooltip />
-                                                  <Line type="monotone" dataKey="value" stroke="#ef4444" strokeWidth={2} dot={false} />
-                                                </LineChart>
-                                              </ResponsiveContainer>
-                                            </div>
-                                          </div>
-                                          <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                            <p className="mb-2 text-sm font-medium text-slate-300">RAM Utilization</p>
-                                            <div className="h-20">
-                                              <ResponsiveContainer width="100%" height="100%">
-                                                <LineChart data={server.ramSeries}>
-                                                  <Tooltip />
-                                                  <Line type="monotone" dataKey="value" stroke="#22C55E" strokeWidth={2} dot={false} />
-                                                </LineChart>
-                                              </ResponsiveContainer>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="space-y-3">
-                                          <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                            <p className="mb-2 text-sm font-medium text-slate-300">Storage Usage</p>
-                                            <div className="h-20">
-                                              <ResponsiveContainer width="100%" height="100%">
-                                                <LineChart data={server.storageSeries}>
-                                                  <Tooltip />
-                                                  <Line type="monotone" dataKey="value" stroke="#3B82F6" strokeWidth={2} dot={false} />
-                                                </LineChart>
-                                              </ResponsiveContainer>
-                                            </div>
-                                          </div>
-                                          <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                            <p className="mb-2 text-sm font-medium text-slate-300">Network Activity</p>
-                                            <div className="h-20">
-                                              <ResponsiveContainer width="100%" height="100%">
-                                                <LineChart data={server.networkSeries}>
-                                                  <Tooltip />
-                                                  <Line type="monotone" dataKey="value" stroke="#F59E0B" strokeWidth={2} dot={false} />
-                                                </LineChart>
-                                              </ResponsiveContainer>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div className="mt-4 grid gap-3 md:grid-cols-2">
-                                        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-3 text-sm text-slate-300">
-                                          <p className="text-slate-400">Uptime</p>
-                                          <p className="mt-1 font-semibold text-white">{server.uptime}</p>
-                                          <p className="mt-3 text-slate-400">Estimated monthly savings</p>
-                                          <p className="mt-1 font-semibold text-emerald-300">{server.savings}</p>
-                                          <p className="mt-3 text-slate-400">AI optimization recommendation</p>
-                                          <p className="mt-1 font-semibold text-white">{server.recommendation}</p>
-                                        </div>
-                                        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-3 text-sm text-slate-300">
-                                          <p className="text-slate-400">Current Instance</p>
-                                          <p className="mt-1 font-semibold text-white">{server.currentInstance}</p>
-                                          <p className="mt-3 text-slate-400">Recommended Instance</p>
-                                          <p className="mt-1 font-semibold text-emerald-300">{server.recommendedInstance}</p>
-                                          <p className="mt-3 text-slate-400">Estimated Monthly Savings</p>
-                                          <p className="mt-1 font-semibold text-white">{server.estimatedSavings}</p>
-                                          <p className="mt-3 text-slate-400">Performance Impact</p>
-                                          <p className="mt-1 font-semibold text-white">{server.performanceImpact}</p>
-                                          <p className="mt-3 text-slate-400">Confidence</p>
-                                          <p className="mt-1 font-semibold text-blue-300">{server.confidence}</p>
-                                          <p className="mt-3 text-slate-400">Reason</p>
-                                          <p className="mt-1 text-slate-300">{server.reason}</p>
-                                          <a 
-                                            href={STREAMLIT_URL}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-block text-center mt-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-400 px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                                          >
-                                            Apply Recommendation
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                ) : null}
-                              </div>
+                              <tr key={server.id} className="border-t border-white/10 bg-slate-900/40 text-slate-200">
+                                <td className="px-3 py-3">
+                                  <button onClick={() => setExpandedServer(isExpanded ? null : server.id)} className="flex items-center gap-2 font-medium text-white">
+                                    {server.name}
+                                    <ChevronDown size={14} className={`transition ${isExpanded ? 'rotate-180' : ''}`} />
+                                  </button>
+                                </td>
+                                <td className="px-3 py-3">{server.provider}</td>
+                                <td className="px-3 py-3">{server.type}</td>
+                                <td className="px-3 py-3">{server.region}</td>
+                                <td className="px-3 py-3">{server.cpu}%</td>
+                                <td className="px-3 py-3">{server.ram}%</td>
+                                <td className="px-3 py-3 text-emerald-300">{server.monthlyCost}</td>
+                                <td className="px-3 py-3">
+                                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300">{server.health}</span>
+                                </td>
+                              </tr>
                             );
                           })}
                         </tbody>
