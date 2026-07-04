@@ -16,6 +16,7 @@ import {
   Sparkles,
   TrendingUp,
   UserCircle2,
+  ExternalLink,
 } from 'lucide-react';
 import {
   Area,
@@ -212,6 +213,9 @@ function App() {
   const [expandedServer, setExpandedServer] = useState(1);
   const [selectedModel, setSelectedModel] = useState(modelData[0]);
 
+  // LIVE STREAMLIT SYSTEM URL
+  const STREAMLIT_URL = "https://cloudoptima-finops-engine-kjnxbvkjrf86avkfgckqxz.streamlit.app";
+
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIsExiting(true);
@@ -282,6 +286,16 @@ function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* 🟢 CORE HACKATHON CONNECT ACTION BUTTON FOR JUDGES */}
+            <a 
+              href={STREAMLIT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:opacity-90"
+            >
+              <Sparkles size={16} /> Launch Live Agent Scan <ExternalLink size={14} />
+            </a>
+
             <button className="rounded-2xl border border-white/10 bg-white/5 p-2.5 text-slate-200 transition hover:-translate-y-0.5 hover:bg-white/10">
               <Bell size={18} />
             </button>
@@ -336,9 +350,15 @@ function App() {
                     <p className="text-xs text-slate-400">Autonomous actions enabled</p>
                   </div>
                 </div>
-                <button className="w-full rounded-2xl bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15">
-                  View Playbook
-                </button>
+                {/* 🟢 ALSO CONNECT SIDEBAR REDIRECT FOR DUAL LAYOUT INTEGRATION */}
+                <a 
+                  href={STREAMLIT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-center rounded-2xl bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15"
+                >
+                  View Live Engine
+                </a>
               </div>
             </div>
           </aside>
@@ -356,9 +376,14 @@ function App() {
                       Manage infrastructure resources and LLM model usage from a single premium control surface.
                     </p>
                   </div>
-                  <button className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5">
+                  <a 
+                    href={STREAMLIT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                  >
                     <Sparkles size={16} /> Run AI Optimization
-                  </button>
+                  </a>
                 </div>
 
                 <div className="mb-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -408,9 +433,14 @@ function App() {
                             <span className="text-blue-300">{item.confidence}</span>
                           </div>
                         </div>
-                        <button className="mt-4 w-full rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15">
+                        <a 
+                          href={STREAMLIT_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-center mt-4 w-full rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15"
+                        >
                           Apply Recommendation
-                        </button>
+                        </a>
                       </div>
                     ))}
                   </div>
@@ -437,13 +467,13 @@ function App() {
                             <th className="px-3 py-3">Cost</th>
                             <th className="px-3 py-3">Health</th>
                           </tr>
-                        </thead>
+                        </table>
                         <tbody>
                           {serverData.map((server) => {
                             const isExpanded = expandedServer === server.id;
                             return (
-                              <>
-                                <tr key={server.id} className="border-t border-white/10 bg-slate-900/40 text-slate-200">
+                              <div key={server.id}>
+                                <tr className="border-t border-white/10 bg-slate-900/40 text-slate-200">
                                   <td className="px-3 py-3">
                                     <button onClick={() => setExpandedServer(isExpanded ? null : server.id)} className="flex items-center gap-2 font-medium text-white">
                                       {server.name}
@@ -461,7 +491,7 @@ function App() {
                                   </td>
                                 </tr>
                                 {isExpanded ? (
-                                  <tr key={`${server.id}-detail`} className="border-t border-white/10 bg-slate-950/70">
+                                  <tr className="border-t border-white/10 bg-slate-950/70">
                                     <td colSpan="8" className="px-3 py-4">
                                       <div className="grid gap-3 lg:grid-cols-2">
                                         <div className="space-y-3">
@@ -535,15 +565,20 @@ function App() {
                                           <p className="mt-1 font-semibold text-blue-300">{server.confidence}</p>
                                           <p className="mt-3 text-slate-400">Reason</p>
                                           <p className="mt-1 text-slate-300">{server.reason}</p>
-                                          <button className="mt-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-400 px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5">
+                                          <a 
+                                            href={STREAMLIT_URL}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-block text-center mt-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-400 px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                                          >
                                             Apply Recommendation
-                                          </button>
+                                          </a>
                                         </div>
                                       </div>
                                     </td>
                                   </tr>
                                 ) : null}
-                              </>
+                              </div>
                             );
                           })}
                         </tbody>
@@ -667,9 +702,14 @@ function App() {
                       Monitor costs, optimize resources and reduce cloud waste using AI.
                     </p>
                   </div>
-                  <button className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5">
+                  <a 
+                    href={STREAMLIT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                  >
                     <Sparkles size={16} /> Run optimization
-                  </button>
+                  </a>
                 </div>
 
                 <div className="mb-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -765,9 +805,14 @@ function App() {
                           <p className="text-sm text-slate-400">Your AWS spending increased 12% this week.</p>
                         </div>
                       </div>
-                      <button className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15">
+                      <a 
+                        href={STREAMLIT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15"
+                      >
                         View Recommendations <ArrowUpRight size={16} />
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
